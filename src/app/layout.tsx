@@ -1,8 +1,12 @@
-import StyledComponentsRegistry from '@/components/layout/StyledComponentsRegistry'
+import './globals.css'
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import './globals.css'
+
 import { AntdRegistry } from '@ant-design/nextjs-registry'
+import ReactQueryProvider from '@/components/layout/ReactQueryProvider'
+import StyledComponentsRegistry from '@/components/layout/StyledComponentsRegistry'
+import RecoilProvider from '@/components/layout/RecoilProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,7 +25,11 @@ export default function RootLayout({
       <body className={inter.className}>
         <StyledComponentsRegistry>
           <AntdRegistry>
-            {children}
+            <RecoilProvider>
+              <ReactQueryProvider>
+                {children}
+              </ReactQueryProvider>
+            </RecoilProvider>
           </AntdRegistry>
         </StyledComponentsRegistry>
       </body>
